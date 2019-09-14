@@ -101,9 +101,11 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = TODO()
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
 fun thirdDigit(number: Int): Int {
-    var numtl: Int
-    if (number >= 10000 and number < 100000)
-
+    if (number>100 and number < 1000)//трёхзначное число
+        return number%10
+    else if (number> 1000 and number<10_000)//четырёхзначное число
+        return number/10%10
+    else return number/100%10//пятизначное число
 }
 
 /**
