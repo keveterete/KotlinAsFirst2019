@@ -82,7 +82,7 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  * Пользователь задает угол в градусах, минутах и секундах (например, 36 градусов 14 минут 35 секунд).
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
-fun angleInRadian(deg: Int, min: Int, sec: Int): Double = {
+fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
 
 }
 
@@ -92,7 +92,12 @@ fun angleInRadian(deg: Int, min: Int, sec: Int): Double = {
  * Найти длину отрезка, соединяющего точки на плоскости с координатами (x1, y1) и (x2, y2).
  * Например, расстояние между (3, 0) и (0, 4) равно 5
  */
-fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = TODO()
+fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
+    val xm = x2 - x1
+    val ym = y2 - y1
+    val xym = sqr(xm) + sqr(ym)
+    return sqrt(xym)
+}
 
 /**
  * Простая
@@ -101,11 +106,7 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = TODO()
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
 fun thirdDigit(number: Int): Int {
-    if (number>100 and number < 1000)//трёхзначное число
-        return number%10
-    else if (number> 1000 and number<10_000)//четырёхзначное число
-        return number/10%10
-    else return number/100%10//пятизначное число
+    return number / 100 % 10
 }
 
 /**
