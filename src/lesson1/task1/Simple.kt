@@ -72,7 +72,7 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int {
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
 fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
-    val lineSegment = sagenes * 48 * 4.445 + arshins * 16 * 4.445 + vershoks * 4.445 // вычисление длины всего вместе
+    val lineSegment = (sagenes * 48 * 4.445 + arshins * 16 * 4.445 + vershoks * 4.445) / 100 // вычисление длины всего вместе в метрах
     return lineSegment
 }
 
@@ -83,7 +83,7 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
 fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
-
+    return (deg + min / 60.0 + sec / 3600.0) * PI / 180 // полное вычисление радиан
 }
 
 /**
@@ -106,7 +106,7 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
 fun thirdDigit(number: Int): Int {
-    return number / 100 % 10
+    return number / 100 % 10 // третья цифра справа в четырёхзначном числе
 }
 
 /**
@@ -129,7 +129,9 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
+fun accountInThreeYears(initial: Int, percent: Int): Double {
+    return initial * ((percent / 100.0 + 1.0) * (percent / 100.0 + 1.0) * (percent / 100.0 + 1.0))// общий расчёт
+}
 
 /**
  * Простая
