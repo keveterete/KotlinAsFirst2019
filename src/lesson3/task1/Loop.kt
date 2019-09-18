@@ -85,7 +85,17 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    var f1 = 1 // переменные для сложения чисел ряда меж собой
+    var f2 = 1
+    var f3 = 0
+    for (a in 1 until n) {
+        f1 = f2
+        f2 += f3
+        f3 = f1
+    }
+    return f2
+}
 
 /**
  * Простая
@@ -93,14 +103,37 @@ fun fib(n: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    var n1 = m
+    var n2 = n
+    while (n1 != n2)
+        if (n1 > n2)
+            n1 -= n2
+        else
+            n2 -= n1
+    return (m * n) / n1
+}
+/*
+{
+    var k = 1 // делитель
+    if (m == n) return m
+    while ((m % k != 0) && (n % k != 0))  Если можно, уточните пожалуйста, почему не работает данное решение. Спасибо
+        k++
+    return k
+}
+ */
 
 /**
  * Простая
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var dvdr = 2
+    while (n % dvdr != 0)
+        dvdr++
+    return dvdr
+}
 
 /**
  * Простая
