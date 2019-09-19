@@ -109,9 +109,9 @@ fun thirdDigit(number: Int): Int = number / 100 % 10 // третья цифра 
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
 fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int {
-    var mnts = hoursArrive * 60 + minutesArrive // время прибытия в минутах
-    mnts -= hoursDepart * 60 + minutesDepart // вычисление разницы минут
-    return mnts
+    val minuteArrive = hoursArrive * 60 + minutesArrive // время прибытия в минутах
+    val minuteDepart = hoursDepart * 60 + minutesDepart // время отправления в минутах
+    return minuteArrive - minuteDepart
 }
 
 /**
@@ -122,7 +122,7 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
 fun accountInThreeYears(initial: Int, percent: Int): Double =
-    initial * ((percent / 100.0 + 1.0) * (percent / 100.0 + 1.0) * (percent / 100.0 + 1.0))// общий расчёт
+    initial * ((percent / 100.0 + 1.0).pow(3))// общий расчёт
 
 /**
  * Простая

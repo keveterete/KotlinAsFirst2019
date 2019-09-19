@@ -6,6 +6,7 @@ import lesson1.task1.discriminant
 import lesson1.task1.sqr
 import kotlin.math.abs
 import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.sqrt
 
 /**
@@ -65,14 +66,13 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String {
-    if (age % 100 in 5..20) // 5 лет, 6 лет и т.д до 20 лет
-        return "$age лет"
-    else if (age % 10 == 1) // 1 год, 21 год т.д.
-        return "$age год"
-    else if (age % 10 in 5..9 || age % 10 == 0) return "$age лет"
-    else return "$age года" // 2 года, 4 года, 73 года
+fun ageDescription(age: Int): String = when {
+    age % 100 in 5..20 -> "$age лет"
+    age % 10 == 1 -> "$age год"
+    age % 10 in 2..4 -> "$age года"
+    else -> "$age лет"
 }
+
 
 /**
  * Простая
@@ -86,9 +86,9 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
-    val s1 = t1 * v1 //первый путь
-    val s2 = t2 * v2 //второй путь
-    val s3 = t3 * v3 //третий путь
+    val s1 = t1 * v1
+    val s2 = t2 * v2
+    val s3 = t3 * v3
     val half = (s1 + s2 + s3) / 2 // половина всего пути
     if (half <= s1) // если половина <= первому пути, то он прошёл её за v1
         return half / v1
@@ -113,7 +113,7 @@ fun whichRookThreatens(
 ): Int {
     var threat = 0
     if ((kingX == rookX1) || (kingY == rookY1)) //угроза от первой ладьи
-        threat ++
+        threat++
     if ((kingX == rookX2) || (kingY == rookY2)) //угроза от второй ладьи
         threat += 2
     return threat
@@ -136,7 +136,7 @@ fun rookOrBishopThreatens(
 ): Int {
     var threat = 0
     if ((kingX == rookX) || (kingY == rookY))//Угроза от ладьи
-        threat ++
+        threat++
     if (abs(bishopX - kingX) == abs(bishopY - kingY))// угроза от слона
         threat += 2
     return threat
@@ -151,13 +151,15 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    var bs = maxOf(a, b, c)// бОльшая сторона
-    var ls = minOf(a, b, c)// Меньшая сторона
+    val bs = maxOf(a, b, c)// бОльшая сторона
+    val ls = minOf(a, b, c)// Меньшая сторона
     val ms = a + b + c - bs - ls// средняя сторона
-    if (bs > ms + ls) return -1 //сравнение бОльшей стороны и суммы двуз других
-    if (sqr(bs) == sqr(ms) + sqr(ls)) return 1 // по свойству прямоугольного треугольника
-    if (sqr(bs) > sqr(ms) + sqr(ls)) return 2 // по свойству тупоугольного треугольника
-    return 0
+    return when {
+        bs > (ms + ls) -> -1
+        sqr(bs) == sqr(ms) + sqr(ls) -> 1
+        sqr(bs) > sqr(ms) + sqr(ls) -> 2
+        else -> 0
+    }
 }
 
 /**
@@ -168,7 +170,11 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = maxOf(-1, (min(b, d) - max(a, c)))
+
+/*{
     if ((b < c) || (a > d)) return -1 // при таких параметрах пересечения быть не может
     return minOf(d, b) - maxOf(a, c) // вычисление длины пересечения
 }
+
+ */
