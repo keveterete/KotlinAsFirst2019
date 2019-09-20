@@ -2,6 +2,8 @@
 
 package lesson3.task1
 
+import kotlin.math.ceil
+import kotlin.math.floor
 import kotlin.math.sqrt
 
 /**
@@ -129,10 +131,10 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var dvdr = 2
-    while (n % dvdr != 0)
-        dvdr++
-    return dvdr
+    var divider = 2
+    while (n % divider != 0)
+        divider++
+    return divider
 }
 
 /**
@@ -140,7 +142,7 @@ fun minDivisor(n: Int): Int {
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int = n / minDivisor(n)
 
 /**
  * Простая
@@ -149,7 +151,16 @@ fun maxDivisor(n: Int): Int = TODO()
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean {
+    var mr = m
+    var nr = n
+    do {
+        if (mr > nr) mr %= nr
+        else nr %= mr
+    } while ((mr != 0) && (nr != 0))
+    nr += mr
+    return nr == 1
+}
 
 /**
  * Простая
@@ -158,7 +169,7 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  * то есть, существует ли такое целое k, что m <= k*k <= n.
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
-fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
+fun squareBetweenExists(m: Int, n: Int): Boolean = ceil(sqrt(m.toDouble())) <= floor(sqrt(n.toDouble()))
 
 /**
  * Средняя
@@ -176,7 +187,16 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int = TODO()
+fun collatzSteps(x: Int): Int {
+    var step = 0
+    var xn = x
+    while (xn != 1) {
+        step++
+        if (xn % 2 == 0) xn /= 2
+        else xn = xn * 3 + 1
+    }
+    return step
+}
 
 /**
  * Средняя
