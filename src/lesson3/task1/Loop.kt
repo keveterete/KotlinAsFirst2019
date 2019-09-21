@@ -287,4 +287,4 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = fib(n)
+fun fibSequenceDigit(n: Int): Int = TODO()
