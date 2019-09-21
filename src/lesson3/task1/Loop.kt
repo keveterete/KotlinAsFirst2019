@@ -2,9 +2,8 @@
 
 package lesson3.task1
 
-import kotlin.math.ceil
-import kotlin.math.floor
-import kotlin.math.sqrt
+import java.lang.StrictMath.pow
+import kotlin.math.*
 
 /**
  * Пример
@@ -227,7 +226,18 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var tn = 0
+    var nn = n
+    var reverse = 0
+    while (nn != 0) {
+        reverse *= 10
+        tn = nn % 10
+        nn /= 10
+        reverse += tn
+    }
+    return reverse
+}
 
 /**
  * Средняя
@@ -238,7 +248,7 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean = revert(n) == n
 
 /**
  * Средняя
@@ -248,7 +258,14 @@ fun isPalindrome(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean {
+    var nn = n / 10
+    while (nn > 0) {
+        if (nn % 10 != n % 10) return true
+        nn /= 10
+    }
+    return false
+}
 
 /**
  * Сложная
@@ -270,4 +287,4 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int = fib(n)
