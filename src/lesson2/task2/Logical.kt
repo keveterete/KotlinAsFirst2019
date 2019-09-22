@@ -83,7 +83,5 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
     val bs = maxOf(a, b) // бОльшая сторона среди 2 длин
     val ls = minOf(a, b) // меньшая сторона среди 2 длин
     val ls2 = if (bs > c) c else bs // либо средняя, либо меньшая из всех сторон
-    if (((r >= ls) && (s >= ls2)) || ((r >= ls2) && (s >= ls)))
-        return true
-    else return false
+    return ((r >= ls) && (s >= ls2)) || ((r >= ls2) && (s >= ls))
 }
