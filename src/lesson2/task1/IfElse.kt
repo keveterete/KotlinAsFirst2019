@@ -92,9 +92,9 @@ fun timeForHalfWay(
     val half = (s1 + s2 + s3) / 2 // половина всего пути
     if (half <= s1) // если половина <= первому пути, то он прошёл её за v1
         return half / v1
-    if (half > s1 && half <= (s1 + s2)) // елсли половина пути это s1 и s2
-        return (half - s1) / v2 + t1
-    else return (half - s1 - s2) / v3 + t1 + t2 // если половина находится на промежутке s3
+    return if (half > s1 && half <= (s1 + s2)) // елсли половина пути это s1 и s2
+        (half - s1) / v2 + t1
+    else (half - s1 - s2) / v3 + t1 + t2 // если половина находится на промежутке s3
 }
 
 /**
@@ -172,9 +172,3 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = maxOf(-1, (min(b, d) - max(a, c)))
 
-/*{
-    if ((b < c) || (a > d)) return -1 // при таких параметрах пересечения быть не может
-    return minOf(d, b) - maxOf(a, c) // вычисление длины пересечения
-}
-
- */

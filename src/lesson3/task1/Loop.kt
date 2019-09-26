@@ -72,11 +72,10 @@ fun digitNumber(n: Int): Int {
     var cn = 0 //кол-во цифр в числе
     var bn = n //берём изначальное число в var, чтобы его можно было изменить
     if (n == 0) return 1
-    else
-        do {
-            cn++
-            bn /= 10
-        } while (bn != 0)
+    do {
+        cn++
+        bn /= 10
+    } while (bn != 0)
     return cn
 }
 
@@ -87,15 +86,15 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    var f1 = 1 // переменные для сложения чисел ряда меж собой
-    var f2 = 1
-    var f3 = 0
+    var firstOfTwo = 1 // переменные для сложения чисел ряда меж собой
+    var secondOfTwo = 1
+    var interVariable = 0
     for (a in 1 until n) {
-        f1 = f2
-        f2 += f3
-        f3 = f1
+        firstOfTwo = secondOfTwo
+        secondOfTwo += interVariable
+        interVariable = firstOfTwo
     }
-    return f2
+    return secondOfTwo
 }
 
 /**
@@ -114,15 +113,6 @@ fun lcm(m: Int, n: Int): Int {
             n2 -= n1
     return (m * n) / n1
 }
-/*
-{
-    var k = 1 // делитель
-    if (m == n) return m
-    while ((m % k != 0) && (n % k != 0))  Если можно, уточните пожалуйста, почему не работает данное решение. Спасибо
-        k++
-    return k
-}
- */
 
 /**
  * Простая
@@ -130,10 +120,10 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var divider = 2
-    while (n % divider != 0)
-        divider++
-    return divider
+    for (a in 2..round(sqrt(n.toDouble())).toInt()) {
+        if (n % a == 0) return a
+    }
+    return n
 }
 
 /**
@@ -150,16 +140,7 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean {
-    var mr = m
-    var nr = n
-    do {
-        if (mr > nr) mr %= nr
-        else nr %= mr
-    } while ((mr != 0) && (nr != 0))
-    nr += mr
-    return nr == 1
-}
+fun isCoPrime(m: Int, n: Int): Boolean = n * m / lcm(m, n) == 1
 
 /**
  * Простая
@@ -240,14 +221,14 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun revert(n: Int): Int {
-    var tn = 0
-    var nn = n
+    var nextNumber = 0
+    var variableN = n
     var reverse = 0
-    while (nn != 0) {
+    while (variableN != 0) {
         reverse *= 10
-        tn = nn % 10
-        nn /= 10
-        reverse += tn
+        nextNumber = variableN % 10
+        variableN /= 10
+        reverse += nextNumber
     }
     return reverse
 }
