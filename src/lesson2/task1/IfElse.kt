@@ -90,11 +90,11 @@ fun timeForHalfWay(
     val s2 = t2 * v2
     val s3 = t3 * v3
     val half = (s1 + s2 + s3) / 2 // половина всего пути
-    if (half <= s1) // если половина <= первому пути, то он прошёл её за v1
-        return half / v1
-    return if (half > s1 && half <= (s1 + s2)) // елсли половина пути это s1 и s2
-        (half - s1) / v2 + t1
-    else (half - s1 - s2) / v3 + t1 + t2 // если половина находится на промежутке s3
+    return when {
+        half <= s1 -> half / v1
+        half > s1 && half <= (s1 + s2) -> (half - s1) / v2 + t1
+        else -> (half - s1 - s2) / v3 + t1 + t2
+    }
 }
 
 /**

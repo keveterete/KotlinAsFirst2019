@@ -2,7 +2,6 @@
 
 package lesson3.task1
 
-import java.lang.StrictMath.pow
 import kotlin.math.*
 
 /**
@@ -69,14 +68,14 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun digitNumber(n: Int): Int {
-    var cn = 0 //кол-во цифр в числе
-    var bn = n //берём изначальное число в var, чтобы его можно было изменить
+    var amountOfN = 0 //кол-во цифр в числе
+    var varN = n //берём изначальное число в var, чтобы его можно было изменить
     if (n == 0) return 1
     do {
-        cn++
-        bn /= 10
-    } while (bn != 0)
-    return cn
+        amountOfN++
+        varN /= 10
+    } while (varN != 0)
+    return amountOfN
 }
 
 /**
@@ -86,15 +85,15 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    var firstOfTwo = 1 // переменные для сложения чисел ряда меж собой
-    var secondOfTwo = 1
+    var first: Int // переменные для сложения чисел ряда меж собой
+    var second = 1
     var interVariable = 0
     for (a in 1 until n) {
-        firstOfTwo = secondOfTwo
-        secondOfTwo += interVariable
-        interVariable = firstOfTwo
+        first = second
+        second += interVariable
+        interVariable = first
     }
-    return secondOfTwo
+    return second
 }
 
 /**
@@ -104,14 +103,14 @@ fun fib(n: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var n1 = m
-    var n2 = n
-    while (n1 != n2)
-        if (n1 > n2)
-            n1 -= n2
+    var varM = m
+    var varN = n
+    while (varM != varN)
+        if (varM > varN)
+            varM -= varN
         else
-            n2 -= n1
-    return (m * n) / n1
+            varN -= varM
+    return (m * n) / varM
 }
 
 /**
@@ -169,11 +168,11 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = ceil(sqrt(m.toDouble())) <= f
  */
 fun collatzSteps(x: Int): Int {
     var step = 0
-    var xn = x
-    while (xn != 1) {
+    var varX = x
+    while (varX != 1) {
         step++
-        if (xn % 2 == 0) xn /= 2
-        else xn = xn * 3 + 1
+        if (varX % 2 == 0) varX /= 2
+        else varX = varX * 3 + 1
     }
     return step
 }
@@ -188,18 +187,18 @@ fun collatzSteps(x: Int): Int {
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
 fun sin(x: Double, eps: Double): Double {
-    var nx = x
-    var degr = 3
+    var varX = x
+    var degree = 3
     var alt = -1
     var nn = 1.0
     if (x / PI % 2.0 == 0.0) return 0.0
     while (abs(nn) >= eps) {
-        nn = x.pow(degr) / factorial(degr) * alt
-        nx += nn
+        nn = x.pow(degree) / factorial(degree) * alt
+        varX += nn
         alt *= -1
-        degr += 2
+        degree += 2
     }
-    return nx
+    return varX
 }
 
 /**
@@ -235,14 +234,14 @@ fun cos(x: Double, eps: Double): Double {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun revert(n: Int): Int {
-    var nextNumber = 0
-    var variableN = n
+    var next: Int
+    var varN = n
     var reverse = 0
-    while (variableN != 0) {
+    while (varN != 0) {
         reverse *= 10
-        nextNumber = variableN % 10
-        variableN /= 10
-        reverse += nextNumber
+        next = varN % 10
+        varN /= 10
+        reverse += next
     }
     return reverse
 }

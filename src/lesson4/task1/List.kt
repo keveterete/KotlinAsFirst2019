@@ -116,11 +116,11 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * Модуль пустого вектора считать равным 0.0.
  */
 fun abs(v: List<Double>): Double {
-    var nn = 0.0
+    var num = 0.0
     for (a in v) {
-        nn += sqr(a)
+        num += sqr(a)
     }
-    return sqrt(nn)
+    return sqrt(num)
 }
 
 /**
@@ -143,7 +143,7 @@ fun center(list: MutableList<Double>): MutableList<Double> {
     if (list.isEmpty()) return list
     val mean = mean(list)
     for (a in 0 until list.size) {
-        list[a] = list[a] - mean
+        list[a] -= mean
     }
     return list
 }
@@ -157,11 +157,11 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  */
 fun times(a: List<Int>, b: List<Int>): Int {
     if (a.isEmpty() || b.isEmpty()) return 0
-    var nn = 0
+    var num = 0
     for (x in a.indices) {
-        nn += a[x] * b[x]
+        num += a[x] * b[x]
     }
-    return nn
+    return num
 }
 
 /**
@@ -172,8 +172,6 @@ fun times(a: List<Int>, b: List<Int>): Int {
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0 при любом x.
  */
-
-
 fun polynom(p: List<Int>, x: Int): Int =
     p.mapIndexed { index, i -> i * x.toDouble().pow(index.toDouble()) }.sum().toInt()
 
@@ -190,10 +188,8 @@ fun polynom(p: List<Int>, x: Int): Int =
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
     if (list.isEmpty()) return list
-    var sumOfPrev = list[0]
     for (a in 1 until list.size) {
-        sumOfPrev += list[a]
-        list[a] = sumOfPrev
+        list[a] += list[a - 1]
     }
     return list
 }
@@ -206,17 +202,17 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> {
  * Множители в списке должны располагаться по возрастанию.
  */
 fun factorize(n: Int): List<Int> {
-    var nn = n
+    var varn = n
     var divide = 2
-    var dividers = mutableListOf<Int>()
-    while ((nn > 0) && divide <= round(sqrt(n.toDouble())).toInt()) {
-        if (nn % divide == 0) {
+    val dividers = mutableListOf<Int>()
+    while ((varn > 0) && divide <= sqrt(n.toDouble()).toInt()) {
+        if (varn % divide == 0) {
             dividers.add(divide)
-            nn /= divide
+            varn /= divide
         } else divide++
     }
-    if (nn != 1) {
-        dividers.add(nn)
+    if (varn != 1) {
+        dividers.add(varn)
     }
     return dividers
 }
@@ -238,12 +234,12 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
 fun convert(n: Int, base: Int): List<Int> {
-    if (n == 0) return listOf<Int>(0)
-    var num = mutableListOf<Int>()
-    var nn = n
-    while (nn > 0) {
-        num.add(nn % base)
-        nn /= base
+    if (n == 0) return listOf()
+    val num = mutableListOf<Int>()
+    var varn = n
+    while (varn > 0) {
+        num.add(varn % base)
+        varn /= base
     }
     return num.reversed()
 }
