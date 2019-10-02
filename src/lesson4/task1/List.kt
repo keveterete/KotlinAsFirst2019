@@ -255,9 +255,17 @@ fun convert(n: Int, base: Int): List<Int> {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
-fun convertToString(n: Int, base: Int): String = TODO() /* {
-    val alph = "abcdefghijklmnopqrstuvwxyz"
-}*/
+fun convertToString(n: Int, base: Int): String {
+    var factor = 1
+    var stringnum = 0
+    var varN = n
+    while (varN != 0) {
+        stringnum += (varN % base) * factor
+        varN /= base
+        factor *= 10
+    }
+    return stringnum.toString()
+}
 
 /**
  * Средняя
