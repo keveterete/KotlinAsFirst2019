@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import lesson1.task1.sqr
 import kotlin.math.*
 
 /**
@@ -187,19 +188,18 @@ fun collatzSteps(x: Int): Int {
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
 fun sin(x: Double, eps: Double): Double {
-    var varX = x
-    var degree = 3
-    var alt = -1
-    var nn = 1.0
-    if (x / PI % 2.0 == 0.0) return 0.0
-    while (abs(nn) >= eps) {
-        nn = x.pow(degree) / factorial(degree) * alt
-        varX += nn
-        alt *= -1
-        degree += 2
+    var num = 3
+    val newx = x % (2 * PI)
+    var newxvar = newx
+    var calc = newx.pow(3) * (-1)
+    while (abs(calc / factorial(num)) >= eps) {
+        newxvar += calc / factorial(num)
+        num += 2
+        calc *= sqr(newx) * (-1)
     }
-    return varX
+    return newxvar
 }
+// переделалзадачу с подсказками
 
 /**
  * Средняя
